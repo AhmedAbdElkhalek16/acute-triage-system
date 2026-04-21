@@ -1,0 +1,22 @@
+{
+  "model": "EfficientNet-B4",
+  "modality": "xray",
+  "num_classes": 2,
+  "classes": [
+    "Normal",
+    "Pneumonia"
+  ],
+  "image_size": 512,
+  "best_threshold": 0.7,
+  "test_metrics": {
+    "sensitivity": 0.969,
+    "specificity": 0.709,
+    "accuracy": 0.872,
+    "f1_pneumonia": 0.89
+  },
+  "training": {
+    "phase1_epochs": 5,
+    "phase2_epochs": 10,
+    "best_val_acc": 0.965
+  }
+}
