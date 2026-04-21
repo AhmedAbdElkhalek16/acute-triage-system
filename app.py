@@ -19,10 +19,10 @@ import numpy as np
 import cv2
 from pathlib import Path
 
-from src.preprocessing import get_val_transforms, load_image
-from src.models import get_model
-from src.triage_engine import TriageEngine
-from src.gradcam import get_gradcam, TARGET_LAYERS
+from Src.preprocessing import get_val_transforms, load_image
+from Src.models import get_model
+from Src.triage_engine import TriageEngine
+from Src.gradcam import get_gradcam, TARGET_LAYERS
 
 
 # ─────────────────────────────────────────────
@@ -53,8 +53,11 @@ def load_models():
         ('xray', XRAY_WEIGHTS, 'efficientnet_b4'),
         ('ct',   CT_WEIGHTS,   'densenet121'),
     ]:
-        model = get_model(modality, num_classes=3, pretrained=False,
-                          device=DEVICE)
+        num_classes_map = {'xray': 2, 'ct': 3}
+        model = get_model(modality,
+                        num_classes=num_classes_map[modality],
+                        pretrained=False,
+                        device=DEVICE)
         if Path(weights_path).exists():
             model.load(weights_path, device=DEVICE)
             print(f"[app] Loaded {modality} weights from {weights_path}")
